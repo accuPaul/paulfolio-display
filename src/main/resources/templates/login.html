@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" data-th-replace="~{segments/wireframe::layout('home', ~{::login_fragment})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div class="container py4" data-th-fragment="login_fragment">
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Please sign in</h1>
+            <p class="col-md-8 fs-4">This page uses Spring Boot's built-in OAuth2 to allow users to log in via Github. It should be noted here that
+                while anyone with a GitHub account can log in, signing in doesn't really do anything unless you're Paul.</p>
+            <a class="btn btm-lg btn-outline-secondary" data-th-href="@{/oauth2/authorization/github}">
+                <i class="bi-github"></i>&nbsp;Login with GitHub
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

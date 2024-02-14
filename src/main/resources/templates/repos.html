@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" data-th-replace="~{segments/wireframe::layout('home', ~{::repos_fragment})}" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" data-th-fragment="repos_fragment">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Language</th>
+            <th scope="col">Source Url</th>
+        </tr>
+        </thead>
+        <tbody data-th-each="repo : ${repos}">
+        <tr>
+            <th scope="row"><input type="checkbox" value="" /></th>
+            <td data-th-text="${repo.name}">What it is called</td>
+            <td data-th-text="${repo.description}">What it is</td>
+            <td data-th-text="${repo.language}">What is it written in (mostly)</td>
+            <td data-th-text="${repo.url}">Where is it</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

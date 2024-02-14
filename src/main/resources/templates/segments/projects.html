@@ -1,0 +1,63 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" data-th-fragment="projectList">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <form class="d-flex" id="search_input" role="search"
+                  data-th-object="${searchInput}"
+                  data-th-action="@{/search}" method="post">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="py-5 container">
+        <div class="card-group" th:each="project : ${projects.getContent()}">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="row d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+                        <div class="col-sm-7 col-md-7 col-9">
+                            <strong th:text="${project.projectName}" />
+                        </div>
+                        <div class="offset-md-0" data-th-if="${appUser?.isAdmin}">
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item">
+                                    <a th:href="'#'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a th:href="@{'/project/'+${project.id}+'/delete'}" th:method="delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0" th:text="${project.description}" />
+                    <a th:href="${project.projectUrl.startsWith('http') ? project.projectUrl : '#'}" class="card-link">Example</a>
+                    <a th:href="${project.projectSource.startsWith('http') ? project.projectSource : '#'}" class="card-link"
+                       th:text="${project.projectSource.startsWith('http') ? 'Source Code' : '(private repository)'}" />
+                </div>
+                <div class="card-footer">
+                    <ul class="list-group list-group-horizontal" data-th-each="tag : ${project.tags}">
+                            <li class="list-group-item">
+                                <span class="badge text-bg-info" data-th-text="${tag}"></span>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
